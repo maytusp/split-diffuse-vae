@@ -1,0 +1,21 @@
+1. Train SPLIT VAE
+HYDRA_FULL_ERROR=1 bash scripts/train_split_ae.sh
+
+2. Train Diffusion Probabilistic Model conditioned on SPLIT-VAE image output
+
+HYDRA_FULL_ERROR=1 bash scripts/train_split_ddpm.sh
+
+3. Train GMM on the SPLIT VAE latents (Extract and train) (Optional)
+HYDRA_FULL_ERROR=1 bash scripts/expde.sh
+
+4. Generate Sample from SPLIT-VAE / SPLIT-DiffuseVAE
+
+4.1 SPLIT-DiffuseVAE (If no GMM model, leave its path as "")
+# Original CelebAHQ DDPM + VAE
+HYDRA_FULL_ERROR=1 bash scripts/test_split_ddpm.sh
+
+# For FFHQ-trained DDPM
+HYDRA_FULL_ERROR=1 bash scripts/refine_img.sh
+
+4.2 SPLIT-VAE
+HYDRA_FULL_ERROR=1 bash scripts/test_split_ae.sh
